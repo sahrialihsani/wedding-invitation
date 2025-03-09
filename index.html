@@ -43,6 +43,84 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+	<style>
+		.grid-gallery {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 10px;
+		}
+
+		.grid-item {
+			overflow: hidden;
+			border-radius: 10px;
+		}
+
+		.grid-item img {
+			width: 100%;
+			height: auto;
+			display: block;
+			border-radius: 10px;
+			transition: transform 0.3s ease-in-out;
+		}
+
+		.grid-item img:hover {
+			transform: scale(1.05);
+		}
+
+		/* Menjadikan gambar pertama lebih besar */
+		.grid-item.featured {
+			grid-column: span 2;
+			grid-row: span 2;
+		}
+
+		@media (max-width: 768px) {
+			.grid-gallery {
+				grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			}
+		}
+		/* Styling Bank */
+		#bank {
+			margin-top: 50px;
+			padding: 20px;
+			background: #f8f8f8;
+			border-radius: 10px;
+		}
+
+		.bank-list {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+		}
+
+		.bank-item {
+			width: 250px;
+			height: 175px;
+			padding: 10px;
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			text-align: center;
+			transition: transform 0.3s ease-in-out;
+		}
+
+		.bank-item:hover {
+			transform: translateY(-5px);
+		}
+
+		.bank-item img {
+			width: 100px;
+			height: auto;
+			margin-bottom: 10px;
+		}
+
+		.bank-item p {
+			font-size: 16px;
+			font-weight: bold;
+			color: #333;
+		}
+
+	</style>
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -53,33 +131,6 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-
-		<!--Floating button-->
-		<div id="floating-button" class="float">
-			<div class="control-center open">
-				<ul class="right-sidebar">
-					<!--gallery-->
-					<li onclick="scrollToElement('fh5co-ayat')" style="background-image: url('./images/quran.png')">
-					</li>
-					<!--chat-->
-					<li onclick="scrollToElement('fh5co-testimonial')"
-						style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABKklEQVRIidWVq04DQRhGv900QUFFCVWgUYQ6PAgeAUVwSDwplocoCamsqKlE4ICQECDlAfAYoAoDHEQ7SdnO7lw6CE6yYi45384/kxnpv5NVDQJ1SXuSdiVtSGpOhl4kDSVdSOplWTYKSgVqwAnwjps3oA3UfOVN4NpDXOQKWHHJ68BDhNxwDyxVBZzPITeclclbwHeCgC9g03jzqYwDOU6VJ7mkfVvAdgK5YccWsGqZ2JC0HNA2rNkCsEwslszVNizM9ABPCTbYMLSt4LLkb2K4sQV0ZS9TDD1rL9BJUJ670ljGV8XjHPJPYKtybUADuI0MOPUqIOPr+hgYBcgHQO62/w5aBA6BPvAMvE6+In1g9uzHUpB38X1sAgM+gKOk4qmANrD+J/JQfgANB//YYXlyuAAAAABJRU5ErkJggg==)">
-					</li>
-				</ul>
-				<!--calendar-->
-				<div onclick="scrollToElement('fh5co-event')" class="option-btn open"></div>
-				<ul class="left-sidebar">
-					<!--countdown-->
-					<li onclick="scrollToElement('fh5co-header')"
-						style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABG0lEQVRIidXVTS4EQRjG8SZ2IrEnETEcQmYsjLkCiUu4g1P42FpxhmGG2IvEcAcfG9Z+FtOS1qaramZ6wZPUpqve5//2k36rs+wvCLd+6yaldjaR8TmKm95iDcIhzrA4bmEHp3jCR74ecYKdwrm7PLoBllOMN9AfkX1ZPaxjBff5s4OY+RbeEsy/9YoWFrCP+VjnVeabaAYgjZRoLqvaLJypUi9m3gnlkACAdtGzPAd70VeMazcEaNYA2AoBlmoA/JiBudJmcPzRzLJsJgKo9jCc1mk1KHqWI7qOdJeifghwXgPgIriL7hTxXEXxWMXzBOZpV0UOaeUFqXox/MLShYbAvVRQF2tjmZdAbRwb/kje8/WAI2xPbPxv9AUiVMwGoTr9YAAAAABJRU5ErkJggg==)">
-					</li>
-					<!--couple-->
-					<li onclick="scrollToElement('fh5co-couple')"
-						style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAB7UlEQVRIie2VPUiVURjH/+eqSSJN4tDWRRAH5xD8QDCwgqAWhwwSaarBwUGaHFwcBAchGqNNdDaKoKAkBEvUURAVRInw82Jx0Z/De64+Xu5773nv0CD3P533eZ//+T3nW6qoomstwAEPgXfAKnAA7AE/gWGgJsbXAIwCi8ARkAF+AS+AqlLQJmCB4voMDAL1xvfUFxin98WgLX5kIdoHbnvfK+AswJMBvgGPLbQGWAmEAgx7XzuQTeDLaSgHfpLA9Bu45X0/yoAC/AXSKUn9AfvuTNIXSb3OuUOgQ9LdAJ8kfZDUJenYf9dKGqiW1JyXuCbpq6RlSRuStiStO+f2TM6DQOiSpOfOuV1gStKIj3eKyx2ZJdqxrlRvwHzMNP4DlomOYx/m+AEdJm9H5mM8cBQCNvKA00AbcKOIp9GuswW3JgBnjO9toKfWVmrBdQnAVkkKvlBKUsbHY6ephNbKMaUkffftj0C6jD5uhiRhrtlcoAXY9jPwJrATq+5AT+eVNfbBZqLjdAq0JwTPBOQ7YM54Nu3PMR/8A9wrYH4UAwZ4VgSaBmYtFOi1CSlgxiTMA5PAhG9jcrfywFngJQGXT1x1VcBrosc8X/sm734BOERPX9AdXrBCoh3YI+mOogdiXdIn59xJWSOqqKL/qXMXI9MKbss7gAAAAABJRU5ErkJggg==)">
-					</li>
-				</ul>
-			</div>
-		</div>
 
 		<div id="overlay">
 			<div class="content">
@@ -258,6 +309,52 @@
 			</div>
 		</div>
 
+		<div id="gallery" class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+					<h2>Galeri Kami</h2>
+					<span style="color: #bf9b73">Kenangan indah yang kami abadikan dalam momen spesial.</span>
+				</div>
+			</div>
+			<div class="grid-gallery">
+				<div class="grid-item featured">
+					<a href="images/gallery (1).jpg" class="gallery-item">
+						<img src="images/gallery (1).jpg" alt="Gallery Image 1">
+					</a>
+				</div>
+				<div class="grid-item">
+					<a href="images/gallery (2).jpg" class="gallery-item">
+						<img src="images/gallery (2).jpg" alt="Gallery Image 2">
+					</a>
+				</div>
+				<div class="grid-item">
+					<a href="images/gallery (3).jpg" class="gallery-item">
+						<img src="images/gallery (3).jpg" alt="Gallery Image 3">
+					</a>
+				</div>
+				<div class="grid-item">
+					<a href="images/gallery (4).jpg" class="gallery-item">
+						<img src="images/gallery (4).jpg" alt="Gallery Image 4">
+					</a>
+				</div>
+				<div class="grid-item">
+					<a href="images/gallery (5).jpg" class="gallery-item">
+						<img src="images/gallery (5).jpg" alt="Gallery Image 5">
+					</a>
+				</div>
+				<div class="grid-item">
+					<a href="images/gallery (6).jpg" class="gallery-item">
+						<img src="images/gallery (6).jpg" alt="Gallery Image 6">
+					</a>
+				</div>
+				<div class="grid-item">
+					<a href="images/gallery (7).JPG" class="gallery-item">
+						<img src="images/gallery (7).JPG" alt="Gallery Image 6">
+					</a>
+				</div>
+			</div>
+		</div>
+
 		<div id="fh5co-testimonial"
 			style="background: url('images/background/repeat-background/so-white.png'); background-repeat:repeat; border-top: 1px solid #f2f2f2; padding: 50px 0;">
 			<img height="400" class="flower-bukutamu-right" style="right: 0;top: 0;position: absolute;"
@@ -285,6 +382,24 @@
 						<hr>
 						<div id="guestList" class="list-group"></div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div id="bank" class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Bank</h2>
+					<span style="color: #bf9b73">Informasi rekening untuk berbagi kebahagiaan bersama kami.</span>
+				</div>
+			</div>
+			<div class="bank-list">
+				<div class="bank-item">
+					<img src="images/bca.png" alt="Bank 1">
+					<p>Nomor Rekening: BCA an Sahrial Ihsani Ishak 0581570898</p>
+				</div>
+				<div class="bank-item">
+					<img src="images/bri.png" alt="Bank 2">
+					<p>Nomor Rekening: BRI an Okma Arnilia 151101000326537</p>
 				</div>
 			</div>
 		</div>
@@ -433,6 +548,15 @@
 			$("html, body").animate({ scrollTop: $(`#${el}`).offset().top }, 1000);
 		}
 	</script>
+	<script src="lib/lightgallery.js/dist/lightgallery.umd.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			lightGallery(document.getElementById("gallery"), {
+				selector: ".gallery-item"
+			});
+		});
+	</script>
+	
 
 </body>
 
